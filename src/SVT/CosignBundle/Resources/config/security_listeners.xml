@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="security.authentication.listener.cosign.class">SVT\CosignBundle\Security\CosignAuthenticationListener</parameter>
+        <parameter key="security.logout.handler.cosign.class">SVT\CosignBundle\Security\CosignLogoutHandler</parameter>
     </parameters>
 
     <services>
@@ -16,6 +17,9 @@
             <argument /> <!-- Provider-shared Key -->
             <argument type="service" id="logger" on-invalid="null" />
             <argument type="service" id="event_dispatcher" on-invalid="null"/>
+        </service>
+        <service id="security.logout.handler.cosign" class="%security.logout.handler.cosign.class%">
+
         </service>
     </services>
 </container>
