@@ -27,7 +27,9 @@ class CosignLogoutHandler implements LogoutHandlerInterface
 
     public function logout(Request $request, Response $response, TokenInterface $token)
     {
-        $response->headers->clearCookie($request->server->get('COSIGN_SERVICE'), '/');
+        if ($request->server->has('COSIGN_SERVICE')) {
+            $response->headers->clearCookie($request->server->get('COSIGN_SERVICE'), '/');
+        }
     }
     
 }
