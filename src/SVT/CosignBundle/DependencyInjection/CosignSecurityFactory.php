@@ -29,13 +29,13 @@ class CosignSecurityFactory implements SecurityFactoryInterface
         $provider = 'security.authentication.provider.pre_authenticated.'.$id;
         $container
             ->setDefinition($provider, new DefinitionDecorator('security.authentication.provider.pre_authenticated'))
-            ->setArgument(0, new Reference($userProvider))
+            ->replaceArgument(0, new Reference($userProvider))
             ->addArgument($id)
         ;
 
         $listenerId = 'security.authentication.listener.cosign.'.$id;
         $listener = $container->setDefinition($listenerId, new DefinitionDecorator('security.authentication.listener.cosign'));
-        $listener->setArgument(2, $id);
+        $listener->replaceArgument(2, $id);
 
         return array($provider, $listenerId, $defaultEntryPoint);
     }
