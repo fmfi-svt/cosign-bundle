@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\Security\Http\Events;
+use Symfony\Component\Security\Http\SecurityEvents;
 use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
@@ -111,7 +111,7 @@ class CosignAuthenticationListener implements ListenerInterface
 
             if ($this->dispatcher !== null) {
                 $loginEvent = new InteractiveLoginEvent($request, $token);
-                $this->dispatcher->dispatch(Events::onSecurityInteractiveLogin, $loginEvent);
+                $this->dispatcher->dispatch(SecurityEvents::INTERACTIVE_LOGIN, $loginEvent);
             }
         } catch (AuthenticationException $failed) {
             $this->securityContext->setToken(null);
