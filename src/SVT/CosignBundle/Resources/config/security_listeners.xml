@@ -19,7 +19,7 @@
             <argument type="service" id="event_dispatcher" on-invalid="null"/>
         </service>
         <service id="security.logout.handler.cosign" class="%security.logout.handler.cosign.class%">
-
+            <argument type="service" id="logger" on-invalid="null" />
         </service>
     </services>
 </container>
