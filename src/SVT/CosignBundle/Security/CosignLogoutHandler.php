@@ -18,6 +18,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\Cookie;
 
 class CosignLogoutHandler implements LogoutHandlerInterface
 {
@@ -38,7 +39,8 @@ class CosignLogoutHandler implements LogoutHandlerInterface
             if ($this->logger) {
                 $this->logger->info(sprintf('Clearing %s cookie', $cookieName));
             }
-            $response->headers->clearCookie($cookieName);
+            // We need to use secure = true to correctly clear cookie
+            $response->headers->setCookie(new Cookie($cookieName, null, 1, '/', null, true));
         }
     }
     
