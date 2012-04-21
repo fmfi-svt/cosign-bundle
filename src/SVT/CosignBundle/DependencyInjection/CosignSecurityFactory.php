@@ -37,7 +37,12 @@ class CosignSecurityFactory implements SecurityFactoryInterface
         $listener = $container->setDefinition($listenerId, new DefinitionDecorator('security.authentication.listener.cosign'));
         $listener->replaceArgument(2, $id);
 
-        return array($provider, $listenerId, $defaultEntryPoint);
+        $entryPoint = 'security.authentication.cosign_entry_point.'.$id;
+        $container
+            ->setDefinition($entryPoint, new DefinitionDecorator('security.authentication.cosign_entry_point'))
+            ->addArgument($config['login_route']);
+
+        return array($provider, $listenerId, $entryPoint);
     }
 
     public function getPosition()
@@ -54,6 +59,7 @@ class CosignSecurityFactory implements SecurityFactoryInterface
     {
         $node
             ->children()
+                ->scalarNode('login_route')->cannotBeEmpty()->end()
                 ->scalarNode('provider')->end()
             ->end()
         ;
