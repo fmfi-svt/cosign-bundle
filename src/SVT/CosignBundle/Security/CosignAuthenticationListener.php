@@ -134,7 +134,7 @@ class CosignAuthenticationListener implements ListenerInterface
     private function getOriginalToken(TokenInterface $token = null)
     {
         if ($token === null) return null;
-        
+
         $roles = $token->getRoles();
         foreach ($roles as $role) {
             if ($role instanceof SwitchUserRole) {

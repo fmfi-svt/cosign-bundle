@@ -38,10 +38,10 @@ class CosignLogoutSuccessHandler implements LogoutSuccessHandlerInterface
         if ($this->logger) {
             $this->logger->info('Cosign logout success handler invoked');
         }
-        
+
         $response = $this->httpUtils->createRedirectResponse($request,
             $this->cosignLogoutPrefix . $request->getUriForPath('/'));
-        
+
         if ($request->server->has('COSIGN_SERVICE')) {
             $cookieName = $request->server->get('COSIGN_SERVICE');
             if ($this->logger) {
@@ -50,8 +50,8 @@ class CosignLogoutSuccessHandler implements LogoutSuccessHandlerInterface
             // We need to use secure = true to correctly clear cookie
             $response->headers->setCookie(new Cookie($cookieName, null, 1, '/', null, true));
         }
-        
+
         return $response;
     }
-    
+
 }
