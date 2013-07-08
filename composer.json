@@ -1,0 +1,11 @@
+{
+    "name": "svt/cosign-bundle",
+    "description": "Support for login via CoSign",
+    "license": "BSD",
+    "autoload": {
+        "psr-0": { "SVT\\CosignBundle": "src/" }
+    },
+    "require": {
+        "symfony/symfony": ">=2.1"
+    }
+}
