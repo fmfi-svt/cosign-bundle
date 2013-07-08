@@ -10,17 +10,13 @@ Installation
 
 ```json
     "require": {
-        ...
-        "svt/cosign-bundle": "@dev",
-        ...
+        "svt/cosign-bundle": "@dev"
     }
     "repositories": {
-        ...
         {
             "type": "git",
             "url": "https://github.com/fmfi-svt/cosign-bundle.git"
-        },
-        ...
+        }
     }
 ```
 
@@ -32,15 +28,15 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         return array(
-        ...
+        // ...
             new SVT\CosignBundle\SVTCosignBundle(),
-        ...
+        // ...
         ;
     }
 
 ```
 
-3. Configure the firewall in `config.yml`:
+3. Configure the firewall in `security.yml`:
 
 ```yaml
 security:
@@ -53,4 +49,6 @@ security:
                 success_handler: security.logout.success_handler.cosign
 ```
 
-4. Implement the login route. You may redirect the user back to page he was on or to homepage, profile page, etc. Note that the user may be already signed in usign cosign when he arrives to your site, in this case the login route will not be visited. For any actions necessary upon any login, use a login handler or a user provider, depending on your needs.
+4. Set cosign_logout_prefix parameter in the config to your weblogin logout URL, ending in ?, e.g. `https://login.uniba.sk/logout.cgi?` for uniba.sk
+
+5. Implement the login route. You may redirect the user back to page he was on or to homepage, profile page, etc. Note that the user may be already signed in usign cosign when he arrives to your site, in this case the login route will not be visited. For any actions necessary upon any login, use a login handler or a user provider, depending on your needs.
