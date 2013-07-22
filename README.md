@@ -12,7 +12,7 @@ Installation
     {
       "require": {
           "svt/cosign-bundle": "@dev"
-      }
+      },
       "repositories": [
           {
               "type": "git",
