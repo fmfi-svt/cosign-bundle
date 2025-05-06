@@ -30,6 +30,7 @@ class CosignSecurityFactory implements SecurityFactoryInterface
         $container
             ->setDefinition($provider, new DefinitionDecorator('security.authentication.provider.pre_authenticated'))
             ->replaceArgument(0, new Reference($userProvider))
+            ->replaceArgument(1, new Reference('security.user_checker.main'))
             ->addArgument($id)
         ;
 
